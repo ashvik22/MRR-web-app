@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
+body {
+  font-family: Georgia, serif; /* Changed font */
+  margin: 0;
+  background-color: #3D6D45; /* Hopea Green */
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  width: 100%;
+  max-width: 42%; /* Changed from 420px */
+  background-color: #3D6D45;
+  padding: 1.6%; /* Changed from 16px */
+  box-sizing: border-box;
+  border: 1% solid #FFBC23; /* Changed from 10px */
+  border-radius: 30px; /* Changed from 30px */
+  box-shadow: 0 0.4% 1.2% rgba(0,0,0,0.2); /* Changed from 0 4px 12px */
+}
+.image-banner img {
+  width: 100%;
+  border-radius: 20px; /* Changed from 20px */
+  object-fit: cover;
+  max-height: 24%; /* Changed from 240px */
+  box-shadow: 0 0.4% 0.8% rgba(0,0,0,0.4); /* Changed from 0 4px 8px */
+}
+.form-box {
+  background-color: #E8E2CE; /* Equatorial Ecru */
+  border-radius: 2%; /* Changed from 20px */
+  padding: 2%; /* Changed from 20px */
+  margin-top: 2%; /* Changed from 20px */
+  text-align: center;
+}
+.form-box h1 {
+  font-size: 1.5em; /* Changed from 1.5rem */
+  margin-bottom: 1.2%; /* Changed from 12px */
+  color: #0A3915; /* Canopy Green */
+}
+.form-box input {
+  width: 100%;
+  padding: 1.2%; /* Changed from 12px */
+  border-radius: 16px; /* Changed from 16px */
+  border: none;
+  background-color: #3D6D45;
+  color: #C3D5B2; /* Seedling Green */
+  font-size: 1em; /* Changed from 1rem */
+  margin-bottom: 1.2%; /* Changed from 12px */
+}
+.form-box input::placeholder {
+  color: #C3D5B2;
+}
+.form-box button {
+  width: 100%;
+  padding: 1.2%; /* Changed from 12px */
+  background-color: #00CC9E; /* Emergent Green */
+  border: none;
+  border-radius: 5px; /* Changed from 1.6% */
+  color: #000;
+  font-weight: bold;
+  font-size: 1em; /* Changed from 1rem */
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.form-box button:hover {
+  background-color: #0A3915;
+  color: #fff;
+}
+footer {
+  text-align: center;
+  margin-top: 2%; /* Changed from 20px */
+  color: #fff;
+}
+footer .logo {
+  width: 8%; /* Changed from 80px */
+  margin-bottom: 1%; /* Changed from 10px */
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fit Image to Handphone Screen</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      font-family: Georgia, serif;
+    }
+
+    img {
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 13%; /* Changed from 80px */
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 2%; /* Changed from 20px */
+      z-index: 2;
+    }
+
+    .btn-start {
+      background-color: darkgreen;
+      color: white;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      font-size: 1em; /* Changed from 1rem */
+      padding: 1.4% 3.2%; /* Changed from 14px 32px */
+      border: none;
+      border-radius: 5px; /* Changed from 5px */
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn-start:hover,
+    .btn-start:focus {
+      background-color: #0A3915;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <img src="check pt 7_B.jpg" alt="Image fitting handphone screen" />
+  <div class="button-container">
+    <a href="check14.html" class="btn-start" role="button" aria-label="Next Checkpoint Button">Complete Trail</a>
+  </div>
+  <script>
+      localStorage.setItem('check10', "2");
+  </script>
+</body>
+</html>

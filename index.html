@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mandai Rainforest Resort Trail</title>
+  <style>
+     
+    /* Reset and base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    button {
+      margin: auto;
+      display: block;
+    }
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    /* Container max-width for large screens */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background-color: #e9e1d3;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    /* Resort Logo and Text */
+    .logo {
+      margin-bottom: 0.5rem;
+    }
+    .logo img {
+      max-width: 140px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .logo-text {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #2b3a20;
+      margin: 0.25rem 0 0 0;
+      line-height: 1.2;
+    }
+    .banyan {
+      font-family: Georgia, serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #000;
+      letter-spacing: 0.08em;
+    }
+
+    /* Navigation (hamburger for mobile, simple for desktop) */
+    nav {
+      margin-top: 0.75rem;
+    }
+    .nav-desktop {
+      display: none;
+      justify-content: center;
+      gap: 2rem;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .nav-desktop a {
+      color: #235230;
+      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    .nav-desktop a:hover,
+    .nav-desktop a:focus {
+      background-color: #235230;
+      color: #e9e1d3;
+      outline: none;
+    }
+    .mobile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+    }
+    .breadcrumb {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #235230;
+    }
+    .hamburger-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #235230;
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: #e9e1d3;
+      padding: 1rem 0;
+      border-top: 1px solid #c5c1b0;
+    }
+    .mobile-menu a {
+      padding: 0.5rem 2rem;
+      font-size: 1.1rem;
+      color: #235230;
+      font-weight: 600;
+      border-bottom: 1px solid #c5c1b0;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu a:hover,
+    .mobile-menu a:focus {
+      background-color: #235230;
+      color: #e9e1d3;
+      outline: none;
+    }
+
+    /* Main Content */
+    main {
+      flex-grow: 1;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    /* Section text header and subheader */
+    .intro-text {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+    .intro-text h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin: 0.25rem 0 0.75rem;
+      letter-spacing: 0.02em;
+    }
+    .intro-text .subtitle {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #2b3a20;
+      letter-spacing: 0.1em;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Nature Walk Image Section */
+    
+    /* Overlay for input form */
+    .input-overlay {
+      position: absolute;
+      left: 50%;
+      top: 80%; /* moved down from 50% to 60% */
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 1.5rem 2rem; /* smaller padding */
+      border-radius: 32px;
+      max-width: 90%;
+      width: 360px; /* smaller width */
+      box-shadow: 0 4px 20px rgb(0 0 0 / 0.1);
+      text-align: center;
+    }
+    .input-overlay label {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #235230;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .input-overlay input[type="text"] {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1.5px solid #7a9a72;
+      font-family: Georgia, serif;
+      transition: border-color 0.3s ease;
+    }
+    .input-overlay input[type="text"]:focus {
+      border-color: #235230;
+      outline: none;
+      box-shadow: 0 0 8px #7a9a72;
+    }
+    .input-overlay button {
+      margin-top: 1.25rem;
+      cursor: pointer;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      background-color: #235230;
+      border: none;
+      border-radius: 5px; /* Changed from 6px */
+      padding: 0.75rem 2rem;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .input-overlay button:hover,
+    .input-overlay button:focus {
+      background-color: #1c4621;
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #d8d3c0;
+      padding: 1.25rem 1rem;
+      font-size: 0.85rem;
+      color: #4a5124;
+      text-align: center;
+      border-top: 1px solid #b9b69d;
+      margin-top: auto;
+    }
+
+    /* Leaf sketch styles for decorative corners */
+    .leaf-top-left,
+    .leaf-bottom-right {
+      position: fixed;
+      width: 80px;
+      height: 80px;
+      stroke: #2b3a20;
+      fill: none;
+      stroke-width: 1.4;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .leaf-top-left {
+      top: 8px;
+      left: 12px;
+      transform: rotate(25deg);
+    }
+    .leaf-bottom-right {
+      bottom: 14px;
+      right: 10px;
+      transform: rotate(-40deg);
+    }
+
+    /* Responsive styles */
+    @media (min-width: 768px) {
+      header {
+        padding: 1rem 0;
+      }
+      .nav-desktop {
+        display: flex;
+      }
+      .mobile-header {
+        display: none;
+      }
+      main {
+        margin-top: 2rem;
+      }
+      .intro-text h1 {
+        font-size: 2.8rem;
+      }
+      .intro-text .subtitle {
+        font-size: 1.25rem;
+      }
+      .input-overlay {
+        padding: 1.5rem 2rem; /* maintain smaller padding */
+        width: 360px; /* maintain smaller width on tablet */
+        max-width: 100%;
+        top: 60%; /* Maintain moved down position */
+      }
+    }
+    @media (min-width: 1440px) {
+      .container {
+        max-width: 1440px;
+      }
+      main {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
+    }
+  
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100vw;
+      max-height: 100vh;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <img src="1_homepage_no_button.jpg" alt="Image fitting handphone screen" />
+  <form
+      class="input-overlay"
+      action="#"
+      method="GET"
+      aria-label="Trail start form"
+      id="startTrailForm"
+    >
+      <label for="visitorName">Enter name to start this trail</label>
+      <input
+        type="text"
+        id="visitorName"
+        name="visitorName"
+        autocomplete="name"
+        required
+        placeholder="Your name"
+        aria-required="true"
+        aria-describedby="inputHelp"
+      />
+      <div>
+        <button type="submit" aria-label="Start trail with visitor name">
+          Start Trail
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    // Prevent form submission for demo
+    const startForm = document.getElementById('startTrailForm');
+    startForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = startForm.visitorName.value.trim();
+      if (nameInput) {
+        localStorage.setItem('userName', nameInput);
+        window.location.href = 'second copy.html';
+      } else {
+        startForm.visitorName.focus();
+      }
+    });
+  </script>
+</body>
+</html>
+
