@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trail Completion</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #eef4e9;
+      color: #2a3a1e;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+      transition: background 0.5s ease;
+    }
+
+    body.completed {
+      background-image: url('14_completed page V4.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      background-color: white;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .message {
+      max-width: 80%;        /* Limit width so it doesn’t stretch too wide */
+      padding: 1.5rem 2rem;  /* Add some padding inside the box */
+      border-radius: 5px;
+      background: #ffffffcc;
+      box-shadow: 0 0.4% 1% rgba(0,0,0,0.1);
+      margin: 20% auto 0 auto; /* Center horizontally and keep top margin */
+      box-sizing: border-box;  /* Make padding included in width */
+    }
+
+    body.completed .message {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .message h1 {
+      color: #235230;
+      font-size: 1.8em;
+    }
+
+    body.completed .message h1,
+    body.completed .message p,
+    body.completed .message li {
+      color: #fff;
+    }
+
+    .message ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .message li {
+      padding: 0.4% 0;
+    }
+
+    .button-container {
+      margin-top: 7%;
+      /* Changed from 10% */
+    }
+
+    .btn-back-to-map {
+      background-color: darkgreen;
+      color: white;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      font-size: 1em;
+      padding: 1.4% 6.4%;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-back-to-map:hover,
+    .btn-back-to-map:focus {
+      background-color: #0A3915;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="message" id="completionMessage">
+    <h1>Checking your progress...</h1>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const allCheckpoints = [
+        "Common Pulai and Raintree and Birdnest Fern",
+        "Fishtail Palm",
+        "Rubber Tree",
+        "Weeping Fig and Wild Cinnamon",
+        "Lipstick Palm",
+        "Wetlands and Nibung"
+      ];
+
+      const visited = JSON.parse(localStorage.getItem('visitedCheckpoints')) || [];
+      const missing = allCheckpoints.filter(name => !visited.includes(name));
+      const container = document.getElementById('completionMessage');
+      container.innerHTML = '';
+
+      if (missing.length === 0) {
+        document.body.classList.add('completed');
+        const userName = localStorage.getItem('userName') || 'Explorer';
+        container.innerHTML = `
+          <h1>Congratulations, ${userName}! 🎉</h1>
+          <p>You have completed the entire Nature Walk Trail.</p>
+        `;
+      } else {
+        container.innerHTML = `
+          <h1>Almost there!</h1>
+          <p>You still need to visit the following checkpoints:</p>
+          <ul>${missing.map(item => `<li>${item}</li>`).join('')}</ul>
+          <div class="button-container">
+            <a href="MAP.html" class="btn-back-to-map" role="button" aria-label="Back to Map">Back to Map</a>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+
+</html>

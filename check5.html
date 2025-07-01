@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fit Image to Handphone Screen</title>
+  <style>
+    /* Reset and base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Georgia, serif;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .image-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      background: url("check pt 2_A.jpg") no-repeat center center;
+      background-size: contain;
+    }
+
+    .image-text {
+      margin-top: 55vh;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #2a3a1e;
+      font-family: Georgia, serif;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      line-height: 1.5;
+      padding: 12px 16px;
+      border-radius: 10px;
+      width: 85%;
+      max-width: 450px;
+      text-align: left;
+    }
+
+    .btn-start {
+      margin-bottom: 10vh;
+      background-color: #235230;
+      color: #fff;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-start:hover,
+    .btn-start:focus {
+      background-color: #1c4621;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="image-container">
+    <div class="image-text">
+      <strong>Rain Tree</strong> (<em>Samanea saman</em>)<br />
+      This tree is commonly planted for its distinctive umbrella-shaped canopy that offers shade. Its leaflets close
+      during
+      overcast weather or at dusk, hence the name Pukul Lima, meaning ‘five o'clock’ in Malay. It serves as a habitat
+      for
+      epiphytes such as ferns, orchids, and milkweed.
+    </div>
+
+    <a href="check6.html" class="btn-start" role="button" aria-label="Next Checkpoint Button">Next</a>
+  </div>
+
+  <script>
+    localStorage.setItem('check2', "2");
+  </script>
+
+</body>
+
+</html>

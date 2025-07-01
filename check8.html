@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fit Image to Handphone Screen</title>
+  <style>
+    /* Reset and base */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Georgia, serif;
+      background-color: white;
+      overflow: hidden;
+    }
+
+    .image-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      background: url("check pt 4.jpg") no-repeat center center;
+      background-size: contain;
+    }
+
+    .image-text {
+      margin-top: 55vh;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #2a3a1e;
+      font-family: Georgia, serif;
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      line-height: 1.5;
+      padding: 12px 16px;
+      border-radius: 10px;
+      width: 85%;
+      max-width: 450px;
+      text-align: left;
+    }
+
+    .btn-start {
+      margin-bottom: 10vh;
+      background-color: #235230;
+      color: #fff;
+      font-family: Georgia, serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-start:hover,
+    .btn-start:focus {
+      background-color: #1c4621;
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="image-container">
+    <div class="image-text">
+      <strong>Rubber Tree</strong> (<em>Hevea brasiliensis</em>)<br />
+      The milky latex from this tree is the source of natural rubber. Introduced as a cash crop in Singapore in the
+      early 1900s, plantations covered 40% of the land by 1935. Abandoned after World War II due to labour-intensive tapping,
+      the Rubber Tree thrives in shade and forests, turning brown before shedding leaves.
+    </div>
+
+    <a href="MAP.html" class="btn-start" role="button" aria-label="Next Checkpoint Button">Back to Map</a>
+  </div>
+
+  <script>
+    localStorage.setItem('check5', "2");
+  </script>
+
+</body>
+
+</html>

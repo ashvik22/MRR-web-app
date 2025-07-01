@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OpenStreetMap Pin Drops</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Georgia, serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #c3d5b2;
+    }
+
+    .map-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .button-container {
+      margin-bottom: 10px;
+    }
+
+    .button {
+      background-color: #3d6d45;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px; /* Changed from 5px */
+      cursor: pointer;
+      margin-right: 5px;
+      font-family: Georgia, serif;
+      font-size: 16px;
+    }
+
+    .button:hover {
+      background-color: #0a3915;
+    }
+
+    #map {
+      width: 80vw;
+      height: 80vh;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .pulse-marker {
+      width: 24px;
+      height: 24px;
+      background: #4CAF50;
+      border: 2px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 rgba(76, 175, 80, 0.4);
+      animation: pulse 2s infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 10px; /* Small text size for labels */
+      color: black;
+      text-align: center;
+      background: white; /* Optional: background for better visibility */
+      padding: 2px;
+      border-radius: 3px;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="map-wrapper">
+    <div class="title">OpenStreetMap Pin Drops</div>
+    <div class="button-container">
+      <button class="button" id="myLocationBtn">My Location</button>
+      <button class="button" id="recenterBtn">Recenter</button>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const originalCoordinates = [1.40721, 103.79161];
+      const southWest = L.latLng(1.406219, 103.790232);
+      const northEast = L.latLng(1.408211, 103.793236);
+      const mapBounds = L.latLngBounds(southWest, northEast);
+
+      const map = L.map('map', {
+        maxBounds: mapBounds,
+        maxBoundsViscosity: 1.0,
+        zoomControl: true
+      }).setView(originalCoordinates, 18);
+
+      map.setMinZoom(17);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      function createPulseIcon(number) {
+        return L.divIcon({
+          className: '',
+          html: `<div class="pulse-marker">${number}</div>`,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12],
+          popupAnchor: [0, -12]
+        });
+      }
+
+      const locations = [
+        { number: 6, name: "Wetlands and Nibung", lat: 1.40755, lng: 103.79165, url: "check12.html" },
+        { number: 5, name: "Lipstick Palm", lat: 1.40719, lng: 103.79194, url: "check11.html" },
+        { number: 4, name: "Weeping Fig and Wild Cinnamon", lat: 1.40702, lng: 103.79190, url: "check9.html" },
+        { number: 3, name: "Rubber Tree", lat: 1.40694, lng: 103.79163, url: "check8.html" },
+        { number: 2, name: "Fishtail Palm", lat: 1.40694, lng: 103.79117, url: "check7.html" },
+        { number: 1, name: "Common Pulai and Raintree and Birdnest Fern", lat: 1.40715, lng: 103.79080, url: "check4.html" }
+      ];
+
+      locations.forEach(location => {
+        const marker = L.marker([location.lat, location.lng], {
+          icon: createPulseIcon(location.number)
+        }).addTo(map);
+
+        marker.on('click', function () {
+          const visited = JSON.parse(localStorage.getItem('visitedCheckpoints')) || [];
+          if (!visited.includes(location.name)) {
+            visited.push(location.name);
+            localStorage.setItem('visitedCheckpoints', JSON.stringify(visited));
+          }
+          window.location.href = location.url;
+        });
+      });
+
+      // Adding always-visible labels at specified coordinates
+      const labels = [
+        { text: "Drop off point", lat: 1.407077, lng: 103.791050 },
+        { text: "Lobby", lat: 1.407385, lng: 103.790977 },
+        { text: "East block", lat: 1.407334, lng: 103.791656 },
+        { text: "Meranti ballroom", lat: 1.407184, lng: 103.791728 },
+        { text: "Treehouses", lat: 1.407262, lng: 103.792308 }
+      ];
+
+      labels.forEach(label => {
+        L.marker([label.lat, label.lng], {
+          icon: L.divIcon({
+            className: 'label',
+            html: label.text,
+            iconSize: [50, 20],
+            iconAnchor: [25, 10],
+            popupAnchor: [0, -10]
+          })
+        }).addTo(map);
+      });
+
+      L.control.scale({ imperial: false }).addTo(map);
+
+      let userMarker;
+      document.getElementById('myLocationBtn').addEventListener('click', function () {
+        if (navigator.geolocation) {
+          navigator.geolocation.watchPosition(function (position) {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+
+            if (!userMarker) {
+              userMarker = L.marker([userLat, userLng]).addTo(map)
+                .bindPopup("You are here!")
+                .openPopup();
+            } else {
+              userMarker.setLatLng([userLat, userLng]);
+            }
+
+            map.setView([userLat, userLng], 19);
+          }, function () {
+            alert("Unable to retrieve your location.");
+          });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+      });
+
+      document.getElementById('recenterBtn').addEventListener('click', function () {
+        map.setView(originalCoordinates, 19);
+      });
+    });
+  </script>
+</body>
+</html>
